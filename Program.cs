@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore; // AddDbContext metodunu ve UseSqlServer metodunu tanýmak için!
+using ECommerce.DatabaseAccessLayer.Contexts; // MyContext sýnýfýnýza eriþmek için!
+
 namespace ECommerce
 {
     public class Program
@@ -8,6 +11,21 @@ namespace ECommerce
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            // ----------------------------------------------------
+            // EF CORE DB CONTEXT KAYDI (Dependency Injection)
+            // ----------------------------------------------------
+
+            // 1. appsettings.json dosyasýndan "DefaultConnection" adlý baðlantý dizisini al
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+            // 2. MyContext'i servis konteynerine kaydet
+            builder.Services.AddDbContext<MyContext>(options =>
+                // MS SQL Server'ý ve baðlantý dizisini kullanacaðýmýzý belirtiyoruz
+                options.UseSqlServer(connectionString)
+            );
+
+            // ----------------------------------------------------
 
             var app = builder.Build();
 
