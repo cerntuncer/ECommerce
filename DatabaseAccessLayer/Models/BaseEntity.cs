@@ -1,3 +1,4 @@
+using DatabaseAccessLayer.Enumerations;
 using ECommerce.DatabaseAccessLayer.Models.Entities;
 using System;
 using System.ComponentModel.DataAnnotations; // Gerekirse [Key] annotation'ý burada tanýmlanabilir
@@ -11,6 +12,8 @@ namespace ECommerce.DatabaseAccessLayer.Models
 
         public DateTime CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
-       
+        // SOFT DELETE ÝÇÝN EKLENEN ALAN
+        public Status Status { get; set; } = Status.Active;
+
     }
 }
