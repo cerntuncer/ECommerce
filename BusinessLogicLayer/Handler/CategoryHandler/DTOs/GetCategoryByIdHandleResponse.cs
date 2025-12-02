@@ -1,0 +1,10 @@
+﻿namespace BusinessLogicLayer.Handler.CategoryHandler.DTOs
+{
+    public class GetCategoryByIdHandleResponse
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = null!;
+        public bool Found { get; set; }
+        public string Message { get; set; } = null!;
+    }
+}
