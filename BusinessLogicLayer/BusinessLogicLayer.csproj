@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ECommerce\DatabaseAccessLayer\DatabaseAccessLayer.csproj" />
+    <ProjectReference Include="..\DatabaseAccessLayer\DatabaseAccessLayer.csproj" />
   </ItemGroup>
 
 </Project>

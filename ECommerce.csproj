@@ -9,6 +9,17 @@
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <Compile Remove="BusinessLogicLayer\**" />
+	  <Compile Remove="DatabaseAccessLayer\**" />
+	  <Content Remove="BusinessLogicLayer\**" />
+	  <Content Remove="DatabaseAccessLayer\**" />
+	  <EmbeddedResource Remove="BusinessLogicLayer\**" />
+	  <EmbeddedResource Remove="DatabaseAccessLayer\**" />
+	  <None Remove="BusinessLogicLayer\**" />
+	  <None Remove="DatabaseAccessLayer\**" />
+	</ItemGroup>
+
 
 	<ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.10">
