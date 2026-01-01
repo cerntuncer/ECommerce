@@ -25,7 +25,7 @@ namespace BusinessLogicLayer.Handler.ProductHandler.Queries
             {
                 return Task.FromResult(new GetProductByIdHandleResponse
                 {
-                    Found = false,
+                    IsSuccess = false,
                     Message = "Ürün bulunamadı."
                 });
             }
@@ -34,7 +34,7 @@ namespace BusinessLogicLayer.Handler.ProductHandler.Queries
 
             return Task.FromResult(new GetProductByIdHandleResponse
             {
-                Found = true,
+                IsSuccess = true,
                 Message = "Ürün başarıyla bulundu.",
                 Id = product.Id,
                 Name = product.Name,

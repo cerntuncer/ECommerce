@@ -21,12 +21,12 @@ namespace BusinessLogicLayer.Handler.UserHandler.Queries
 
             if (user == null)
             {
-                return Task.FromResult(new GetUserByIdHandleResponse { Found = false, Message = "Kullanıcı bulunamadı." });
+                return Task.FromResult(new GetUserByIdHandleResponse { IsSuccess = false, Message = "Kullanıcı bulunamadı." });
             }
 
             return Task.FromResult(new GetUserByIdHandleResponse
             {
-                Found = true,
+                IsSuccess = true,
                 Message = "Kullanıcı başarıyla bulundu.",
                 Id = user.Id,
                 Email = user.Email,

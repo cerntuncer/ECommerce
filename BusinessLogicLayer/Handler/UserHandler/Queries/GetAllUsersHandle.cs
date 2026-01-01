@@ -8,24 +8,25 @@ using System.Threading.Tasks;
 namespace BusinessLogicLayer.Handler.UserHandler.Queries
 {
     // Handler, GetAllUsersRequest'i alır ve GetAllUsersHandleResponse döner.
-    public class GetAllCategoriesHandleRequest : IRequestHandler<DTOs.GetAllCategoriesHandleRequest, GetAllCategoriesHandleResponse>
+    public class GetAllUsersHandleRequest : IRequestHandler<DTOs.GetAllUsersHandleRequest, GetAllUsersHandleResponse>
     {
         private readonly IUserRepository _userRepository;
 
         // Constructor Injection
-        public GetAllCategoriesHandleRequest(IUserRepository userRepository)
+
+        public GetAllUsersHandleRequest(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
 
-        public Task<GetAllCategoriesHandleResponse> Handle(DTOs.GetAllCategoriesHandleRequest request, CancellationToken cancellationToken)
+        public Task<GetAllUsersHandleResponse> Handle(DTOs.GetAllUsersHandleRequest request, CancellationToken cancellationToken)
         {
             // Tüm aktif kullanıcıları getirir.
             var users = _userRepository.GetAll();
 
             if (!users.Any())
             {
-                return Task.FromResult(new GetAllCategoriesHandleResponse
+                return Task.FromResult(new GetAllUsersHandleResponse
                 {
                     IsSuccess = false,
                     Message = "Kayıtlı aktif kullanıcı bulunamadı."
@@ -43,7 +44,7 @@ namespace BusinessLogicLayer.Handler.UserHandler.Queries
             }).ToList();
 
             // Sonuç DTO'sunu hazırlama
-            return Task.FromResult(new GetAllCategoriesHandleResponse
+            return Task.FromResult(new GetAllUsersHandleResponse
             {
                 IsSuccess = true,
                 Users = responseList,

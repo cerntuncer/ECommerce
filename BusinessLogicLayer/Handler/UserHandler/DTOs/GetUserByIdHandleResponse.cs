@@ -7,7 +7,7 @@
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public bool IsAdmin { get; set; }
-        public bool Found { get; set; }
+        public bool IsSuccess { get; set; }
         public string Message { get; set; } = null!;
     }
 }

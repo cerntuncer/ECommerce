@@ -21,14 +21,14 @@ namespace BusinessLogicLayer.Handler.UserHandler.Commands
 
             if (userToDelete == null)
             {
-                return Task.FromResult(new DeleteUserHandleResponse { Success = false, Message = "Silinecek kullanıcı bulunamadı." });
+                return Task.FromResult(new DeleteUserHandleResponse { IsSuccess = false, Message = "Silinecek kullanıcı bulunamadı." });
             }
 
             _userRepository.Delete(userToDelete); // Soft Delete işlemi
 
             return Task.FromResult(new DeleteUserHandleResponse
             {
-                Success = true,
+                IsSuccess = true,
                 Message = $"Kullanıcı (ID: {request.Id}) başarıyla pasife çekildi."
             });
         }

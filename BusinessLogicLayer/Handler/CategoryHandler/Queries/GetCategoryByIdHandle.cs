@@ -23,14 +23,14 @@ namespace BusinessLogicLayer.Handler.CategoryHandler.Queries
             {
                 return Task.FromResult(new GetCategoryByIdHandleResponse
                 {
-                    Found = false,
+                    IsSuccess = false,
                     Message = "Kategori bulunamadı."
                 });
             }
 
             return Task.FromResult(new GetCategoryByIdHandleResponse
             {
-                Found = true,
+                IsSuccess = true,
                 Message = "Kategori başarıyla bulundu.",
                 Id = category.Id,
                 Name = category.Name

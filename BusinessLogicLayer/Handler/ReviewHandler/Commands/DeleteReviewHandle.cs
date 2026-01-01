@@ -23,7 +23,7 @@ namespace BusinessLogicLayer.Handler.ReviewHandler.Commands
             {
                 return Task.FromResult(new DeleteReviewHandleResponse
                 {
-                    Success = false,
+                    IsSuccess = false,
                     Message = $"Silinecek yorum bulunamadı. ID: {request.ReviewId}"
                 });
             }
@@ -32,7 +32,7 @@ namespace BusinessLogicLayer.Handler.ReviewHandler.Commands
 
             return Task.FromResult(new DeleteReviewHandleResponse
             {
-                Success = true,
+                IsSuccess = true,
                 Message = $"Yorum başarıyla silindi (Soft Delete). ID: {request.ReviewId}"
             });
         }

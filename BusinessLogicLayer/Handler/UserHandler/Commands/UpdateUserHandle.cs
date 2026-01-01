@@ -21,7 +21,7 @@ namespace BusinessLogicLayer.Handler.UserHandler.Commands
 
             if (userToUpdate == null)
             {
-                return Task.FromResult(new UpdateUserHandleResponse { Success = false, Message = "Güncellenecek kullanıcı bulunamadı." });
+                return Task.FromResult(new UpdateUserHandleResponse { IsSuccess = false, Message = "Güncellenecek kullanıcı bulunamadı." });
             }
 
             userToUpdate.FirstName = request.FirstName;
@@ -32,7 +32,7 @@ namespace BusinessLogicLayer.Handler.UserHandler.Commands
 
             return Task.FromResult(new UpdateUserHandleResponse
             {
-                Success = true,
+                IsSuccess = true,
                 Message = "Kullanıcı bilgileri başarıyla güncellendi."
             });
         }

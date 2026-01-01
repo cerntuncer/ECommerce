@@ -33,7 +33,7 @@ namespace BusinessLogicLayer.Handler.ReviewHandler.Commands
             return Task.FromResult(new CreateReviewHandleResponse
             {
                 ReviewId = newReview.Id,
-                Success = true,
+                IsSuccess = true,
                 Message = $"Yorum başarıyla oluşturuldu. ID: {newReview.Id}"
             });
         }

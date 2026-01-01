@@ -33,7 +33,7 @@ namespace BusinessLogicLayer.Handler.UserHandler.Commands
             {
                 return Task.FromResult(new CreateUserHandleResponse
                 {
-                    Success = false,
+                    IsSuccess = false,
                     Message = "Bu e-posta adresi zaten kullanımda."
                 });
             }
@@ -53,7 +53,7 @@ namespace BusinessLogicLayer.Handler.UserHandler.Commands
 
             return Task.FromResult(new CreateUserHandleResponse
             {
-                Success = true,
+                IsSuccess = true,
                 Message = "Kullanıcı başarıyla kaydedildi.",
                 Id = newUser.Id,
                 Email = newUser.Email

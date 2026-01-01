@@ -8,7 +8,7 @@
         public int Rating { get; set; }
         public string Content { get; set; } = null!;
         public DateTime ReviewDate { get; set; }
-        public bool Found { get; set; }
+        public bool IsSuccess { get; set; }
         public string Message { get; set; } = null!;
     }
 }

@@ -14,7 +14,7 @@ namespace BusinessLogicLayer.Handler.UserHandler.DTOs
     }
 
     // Asıl liste yanıtını taşıyan DTO
-    public class GetAllCategoriesHandleResponse
+    public class GetAllUsersHandleResponse
     {
         public List<UserListItemDto> Users { get; set; } = new List<UserListItemDto>();
         public bool IsSuccess { get; set; }

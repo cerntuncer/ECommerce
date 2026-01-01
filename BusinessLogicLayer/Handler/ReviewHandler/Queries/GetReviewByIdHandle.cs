@@ -23,7 +23,7 @@ namespace BusinessLogicLayer.Handler.ReviewHandler.Queries
             {
                 return Task.FromResult(new GetReviewByIdHandleResponse
                 {
-                    Found = false,
+                    IsSuccess = false,
                     Message = $"Review bulunamadı. ID: {request.ReviewId}"
                 });
             }
@@ -36,7 +36,7 @@ namespace BusinessLogicLayer.Handler.ReviewHandler.Queries
                 Rating = review.Rating,
                 Content = review.Content,
                 ReviewDate = review.CreatedDate,
-                Found = true,
+                IsSuccess = true,
                 Message = $"Review başarıyla getirildi. ID: {review.Id}"
             });
         }

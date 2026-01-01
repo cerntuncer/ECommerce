@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
-        public bool Found { get; set; }
+        public bool IsSuccess { get; set; }
         public string Message { get; set; } = null!;
     }
 }
