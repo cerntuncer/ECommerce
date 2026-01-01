@@ -13,9 +13,8 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\DatabaseAccessLayer\DatabaseAccessLayer.csproj" />
-<ProjectReference Include="..\BusinessLogicLayer\BusinessLogicLayer.csproj" />
-adım ilki
-l
+		<ProjectReference Include="..\BusinessLogicLayer\BusinessLogicLayer.csproj" />
+
 	</ItemGroup>
 
 </Project>
