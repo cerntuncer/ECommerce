@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DatabaseAccessLayer.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20251021184939_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260107094953_InitialMigration_V1")]
+    partial class InitialMigration_V1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.10")
+                .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -61,6 +61,9 @@ namespace DatabaseAccessLayer.Migrations
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(10, 2)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<int>("StockQuantity")
                         .HasColumnType("int");
@@ -111,6 +114,9 @@ namespace DatabaseAccessLayer.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
@@ -137,8 +143,11 @@ namespace DatabaseAccessLayer.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
@@ -174,6 +183,9 @@ namespace DatabaseAccessLayer.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
@@ -188,16 +200,18 @@ namespace DatabaseAccessLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2025, 10, 21, 21, 49, 35, 246, DateTimeKind.Local).AddTicks(8100),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Tutarlı ve Güvenilir Yorumlar",
-                            Name = "Yeşil Bayrak"
+                            Name = "Yeşil Bayrak",
+                            Status = 2
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2025, 10, 21, 21, 49, 35, 301, DateTimeKind.Local).AddTicks(271),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Tutarsız veya Şüpheli Yorumlar",
-                            Name = "Kırmızı Bayrak"
+                            Name = "Kırmızı Bayrak",
+                            Status = 2
                         });
                 });
 
@@ -232,6 +246,9 @@ namespace DatabaseAccessLayer.Migrations
 
                     b.Property<DateTime>("ReviewDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");

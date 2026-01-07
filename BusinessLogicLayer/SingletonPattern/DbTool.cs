@@ -13,7 +13,7 @@ namespace BusinessLogicLayer.SingletonPattern
             if (_context == null)
             {
                 var optionsBuilder = new DbContextOptionsBuilder<MyContext>();
-                optionsBuilder.UseSqlServer("Server=.;Database=ECommerceDB;Trusted_Connection=True;");
+                DbContextOptionsBuilder<MyContext> dbContextOptionsBuilder = optionsBuilder.UseSqlServer("Server=.;Database=ECommerceDB;Trusted_Connection=True;");
                 _context = new MyContext(optionsBuilder.Options);
             }
 

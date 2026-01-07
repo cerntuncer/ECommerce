@@ -1,0 +1,183 @@
+﻿@using BusinessLogicLayer.Handler.ProductHandler.DTOs
+@model GetProductByIdHandleResponse
+
+@{
+    ViewData["Title"] = Model.Name + " - Analiz Detayları";
+}
+
+<div class="container mt-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent p-0">
+            <li class="breadcrumb-item"><a href="/" class="text-decoration-none">Ürünler</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
+        </ol>
+    </nav>
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body">
+            <h5 class="fw-bold mb-3"><i class="bi bi-bar-chart-line me-2"></i>Yapay Zeka Güven Analizi</h5>
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="progress mb-2" style="height: 25px; border-radius: 15px;">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 80%" title="Tutarlı">Tutarlı (%80)</div>
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" title="Tutarsız">Şüpheli (%20)</div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-end">
+                    <span class="text-muted small">Toplam 150 yorum analiz edildi.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm h-100 overflow-hidden">
+                <div class="p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <h2 class="fw-bold mb-0">@Model.Name</h2>
+                        @if (Model.FlagName == "Yeşil Bayrak")
+                        {
+                            <span class="badge rounded-pill bg-success px-3 py-2">
+                                <i class="bi bi-shield-check"></i> Güvenilir Ürün
+                            </span>
+                        }
+                        else if (Model.FlagName == "Kırmızı Bayrak")
+                        {
+                            <span class="badge rounded-pill bg-danger px-3 py-2">
+                                <i class="bi bi-exclamation-triangle"></i> Şüpheli İçerik
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="badge rounded-pill bg-secondary px-3 py-2">Henüz Analiz Edilmedi</span>
+                        }
+                    </div>
+
+                    <p class="text-muted mb-4" style="min-height: 100px;">@Model.Description</p>
+
+                    <div class="bg-light p-3 rounded-3 d-flex justify-content-between align-items-center">
+                        <h3 class="text-primary fw-bold mb-0">@Model.Price.ToString("N2") ₺</h3>
+                        <div class="text-muted"><i class="bi bi-box-seam me-1"></i> Stokta Mevcut</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-dark text-white p-3">
+                    <h5 class="mb-0"><i class="bi bi-cpu me-2"></i>Yapay Zeka Analiz Paneli</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form id="commentForm">
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">1. Adım: Yıldız Puanı Seçin</label>
+                            <div class="star-rating fs-2 text-warning" id="starSelector">
+                                <i class="bi bi-star-fill" data-value="1"></i>
+                                <i class="bi bi-star-fill" data-value="2"></i>
+                                <i class="bi bi-star-fill" data-value="3"></i>
+                                <i class="bi bi-star-fill" data-value="4"></i>
+                                <i class="bi bi-star-fill" data-value="5"></i>
+                            </div>
+                            <input type="hidden" id="ratingValue" value="5">
+                            <small class="text-muted">Puanınızın yorumunuzla tutarlı olması önerilir.</small>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">2. Adım: Görüşlerinizi Yazın</label>
+                            <textarea class="form-control border-0 bg-light" id="content" rows="4"
+                                      placeholder="Yapay zeka metninizi duygu ve tutarlılık açısından analiz edecektir..."></textarea>
+                        </div>
+
+                        <button type="button" onclick="submitComment()" id="btnSubmit" class="btn btn-primary w-100 py-3 shadow-sm fw-bold">
+                            Yorumu Gönder & Analiz Et
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .star-rating i {
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+        .star-rating i:hover {
+            transform: scale(1.2);
+        }
+
+    .bg-light {
+        background-color: #f8f9fa !important;
+    }
+
+    .card {
+        transition: transform 0.3s ease;
+    }
+</style>
+
+@section Scripts {
+    <script>
+        // Yıldız Seçme Mantığı
+        const stars = document.querySelectorAll('#starSelector i');
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const val = star.getAttribute('data-value');
+                document.getElementById('ratingValue').value = val;
+
+                stars.forEach(s => {
+                    const sVal = s.getAttribute('data-value');
+                    if (sVal <= val) {
+                        s.classList.replace('bi-star', 'bi-star-fill');
+                    } else {
+                        s.classList.replace('bi-star-fill', 'bi-star');
+                    }
+                });
+            });
+        });
+
+        // API'ye Yorum Gönderme
+        async function submitComment() {
+            const btn = document.getElementById('btnSubmit');
+            const rating = document.getElementById('ratingValue').value;
+            const content = document.getElementById('content').value;
+
+            if(!content || content.length < 5) {
+                alert("Lütfen geçerli bir yorum yazın.");
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Analiz Yapılıyor...';
+
+            try {
+                // Sizin launchSettings.json dosyanızdaki HTTPS portu olan 7045 kullanıldı
+                const response = await fetch('https://localhost:7045/api/Review', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        productId: @Model.Id,
+                        userId: 1, // Örnek Kullanıcı ID
+                        rating: parseInt(rating),
+                        content: content
+                    })
+                });
+
+                if (response.ok) {
+                    alert("Analiz Tamamlandı! Yorumunuz ve ürün durumu güncellendi.");
+                    location.reload();
+                } else {
+                    alert("API hatası oluştu. Lütfen API projesinin çalıştığından emin olun.");
+                    btn.disabled = false;
+                    btn.innerText = "Yorumu Gönder & Analiz Et";
+                }
+            } catch (error) {
+                console.error("Hata:", error);
+                alert("Sunucuya bağlanılamadı. Port numarasını veya API durumunu kontrol edin.");
+                btn.disabled = false;
+                btn.innerText = "Yorumu Gönder & Analiz Et";
+            }
+        }
+    </script>
+}

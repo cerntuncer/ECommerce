@@ -19,9 +19,10 @@ namespace DatabaseAccessLayer.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -37,7 +38,8 @@ namespace DatabaseAccessLayer.Migrations
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -56,7 +58,8 @@ namespace DatabaseAccessLayer.Migrations
                     PasswordHash = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     IsAdmin = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -78,7 +81,8 @@ namespace DatabaseAccessLayer.Migrations
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     FlagId = table.Column<int>(type: "int", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -111,7 +115,8 @@ namespace DatabaseAccessLayer.Migrations
                     NLPSentimentScore = table.Column<decimal>(type: "decimal(3,2)", nullable: true),
                     IsRatingConsistent = table.Column<bool>(type: "bit", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -132,11 +137,11 @@ namespace DatabaseAccessLayer.Migrations
 
             migrationBuilder.InsertData(
                 table: "Flags",
-                columns: new[] { "Id", "CreatedDate", "Description", "Name", "UpdatedDate" },
+                columns: new[] { "Id", "Description", "Name", "Status", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2025, 10, 21, 21, 49, 35, 246, DateTimeKind.Local).AddTicks(8100), "Tutarlı ve Güvenilir Yorumlar", "Yeşil Bayrak", null },
-                    { 2, new DateTime(2025, 10, 21, 21, 49, 35, 301, DateTimeKind.Local).AddTicks(271), "Tutarsız veya Şüpheli Yorumlar", "Kırmızı Bayrak", null }
+                    { 1, "Tutarlı ve Güvenilir Yorumlar", "Yeşil Bayrak", 2, null },
+                    { 2, "Tutarsız veya Şüpheli Yorumlar", "Kırmızı Bayrak", 2, null }
                 });
 
             migrationBuilder.CreateIndex(

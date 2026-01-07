@@ -1,0 +1,43 @@
+﻿@using BusinessLogicLayer.Handler.ProductHandler.DTOs
+@model List<ProductListItemDto>
+
+<div class="container mt-5">
+    <div class="row mb-4">
+        <div class="col text-center">
+            <h1 class="display-5 fw-bold">🛒 E-Ticaret Analiz Sistemi</h1>
+            <p class="lead text-muted">Yorumların ve puanların tutarlılığını yapay zeka ile ölçün.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="card-title fw-bold">@item.Name</h5>
+                            <span class="badge @(item.FlagId == 1 ? "bg-success" : item.FlagId == 2 ? "bg-danger" : "bg-secondary")">
+                                @(item.FlagId == 1 ? "Güvenilir" : item.FlagId == 2 ? "Şüpheli" : "Analiz Edilmedi")
+                            </span>
+                        </div>
+                        <p class="card-text text-truncate">@item.Description</p>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="text-warning me-2">
+                                @for (int i = 0; i < 5; i++)
+                                {
+                                    <i class="bi @(i < item.AverageRating ? "bi-star-fill" : "bi-star")"></i>
+                                }
+                            </div>
+                            <small class="text-muted">(@item.AverageRating.ToString("F1"))</small>
+                        </div>
+                        <h4 class="text-primary fw-bold">@item.Price.ToString("N2") ₺</h4>
+                    </div>
+                    <div class="card-footer bg-white border-0 pb-3">
+                        <a asp-action="Details" asp-route-id="@item.ProductId" class="btn btn-dark w-100">Ürünü ve Yorumları İncele</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
